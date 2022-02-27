@@ -81,7 +81,7 @@ export async function updateUser(req: Request, res: Response) {
                                 name,
                                 password: hashedPassword,
                                 email,
-                                status: statuses
+                                // status: statuses
                         },
                         where: { id }
                 });
