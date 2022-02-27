@@ -14,7 +14,7 @@ import RouteProtector from "../../middlewares/RouteProtector";
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
 
-    let [isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
+    let [isUploadingDone, isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
 
     useEffect(() => {
         if (recordStatus == "RECORDED")
@@ -64,7 +64,7 @@ const Record = () => {
                                 alt="record" className="mt-5"
                                 onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")}/>
                         }
-                        <div className={`${styles.middle} ${recordStatus == 'NOT_RECORDED' ? styles.hide : ''}`}>
+                        <div className={`${styles.middle} ${recordStatus == 'NOT_RECORDED' || isUploadingDone ? styles.hide : ''}`}>
                             <div className={`${styles.bar} ${styles.bar1}`}></div>
                             <div className={`${styles.bar} ${styles.bar2}`}></div>
                             <div className={`${styles.bar} ${styles.bar3}`}></div>
