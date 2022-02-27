@@ -4,13 +4,15 @@ import React from "react";
 import icon from '../../public/icon.svg';
 import globalStyles from "../../styles/global-colors.module.css";
 import styles from '../../styles/Signin.module.scss';
-
+import UserService from "../../services/UserService";
+import { useRouter } from "next/router";
 
 
 export function Login() {
 
     const [form, setForm] = React.useState({
-        login: "",
+        name: "",
+        email:"",
         password: "",
     });
 
@@ -34,6 +36,15 @@ export function Login() {
         setForm({ ...form, [property]: event.target.value });
     };
 
+     const router = useRouter();
+
+    const Login=()=>{
+        UserService.create(form)
+        .then((res)=>{
+            router.push("/auth/signin")
+            // console.log(res.data)
+        }).catch(e=>console.log(e))
+    }
 
     return (
         <div className='container'>
@@ -56,15 +67,15 @@ export function Login() {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-10 text-center">
-                                <div><input placeholder="Enter your names" onChange={handleFormChange("login")}
+                                <div><input placeholder="Enter your names" onChange={handleFormChange("name")}
                                     className={styles.input} type="text" /></div>
-                                <div><input placeholder="Enter your email" onChange={handleFormChange("login")}
+                                <div><input placeholder="Enter your email" onChange={handleFormChange("email")}
                                     className={styles.input} type="text" /></div>
                                 <div><input placeholder="Enter your Password" onChange={handleFormChange("password")}
-                                    className={styles.input} type="text" /></div>
+                                    className={styles.input} type="password" /></div>
 
 
-                                <button className={styles.button + " " + globalStyles.globalBackColor} onClick={() => login()}>{loading ? (
+                                <button className={styles.button + " " + globalStyles.globalBackColor} onClick={() => Login()}>{loading ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img
                                         src={"/img/loader.gif"}
