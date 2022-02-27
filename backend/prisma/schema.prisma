@@ -18,6 +18,7 @@ model User {
   type     UserType @default(ADMIN)
 
   requests Request[]
+  Response Response[]
 }
 
 model Request {
@@ -36,10 +37,12 @@ model Response {
   id        Int            @id @default(autoincrement())
   requestId Int
   body      String
+  userId    Int
   status    ResponseStatus @default(OPEN)
   createdAt DateTime       @default(now())
   updatedAt DateTime       @default(now())
   request   Request        @relation(fields: [requestId], references: [id])
+  user      User           @relation(fields: [userId], references: [id])
 }
 
 enum ResponseStatus {
