@@ -2,11 +2,12 @@ import { Express } from "express";
 import { protect } from "../utils/auth";
 import { createRequest, getAllRequests, getRequestsByUser, updateRequest } from "./requests";
 import { createResponse, deleteResponse, getAllResponses, updateResponse } from "./response";
-import { createUser, getUsers, login, me } from "./users";
+import { createUser, getUsers, login, me, updateUser } from "./users";
 
 export default function routes(app: Express) {
         app.get("/api/users", (req, res) => getUsers(req, res));
         app.post("/api/users", (req, res) => createUser(req, res));
+        app.put("/api/users/:id", (req, res) => updateUser(req, res));
         app.post("/api/login", (req, res) => login(req, res));
 
         // get current logged in user

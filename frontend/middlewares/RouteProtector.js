@@ -8,6 +8,9 @@ export default function RouteProtector( { children, only } ) {
     useEffect(async () => {
         if (AuthService.isLoggedIn() && !AuthService.tokenExpired()) {
             setLoading(false)
+            let user = await AuthService.getMe()
+            if(user.data.data.type == 'USER')
+                await Router.push("/order/record")
         } else {
             await Router.push("/auth/signin")
         }

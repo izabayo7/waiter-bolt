@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const domain ="http://8096-197-243-61-202.ngrok.io"
+export const domain ="http://00d6-197-243-61-202.ngrok.io/"
 import AuthService from './AuthService'
 
 

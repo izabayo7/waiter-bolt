@@ -1,9 +1,11 @@
-import {useEffect, useState} from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import RequestService from "../../services/RequestService";
 
 const useRecorder = () => {
     const [discard, setDiscard] = useState(false);
+    const [isUploadingDone, setIsUploadingDone] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [recorder, setRecorder] = useState(null);
 
@@ -46,11 +48,15 @@ const useRecorder = () => {
                 },
             }
             const res = await axios.post("https://cors-anywhere.herokuapp.com/" + 'https://mbaza.dev.cndp.org.rw/deepspeech/api/api/v1/stt/http', data, config);
-            console.log(res)
+
+            if (!res.status !== 200) {
+                toast.error("Error while processing")
+            }
+
             if (res.data) {
                 console.log(res.data.message)
-                // setDiscard(URL.createObjectURL(e.data));
                 RequestService.sendOrder(res.data.message)
+                setIsUploadingDone(true)
             }
         };
 
@@ -61,6 +67,7 @@ const useRecorder = () => {
     const startRecording = () => {
         setIsRecording(true);
         setDiscard(false)
+        setIsUploadingDone(false)
     };
     const discardRecording = () => {
         setDiscard(true)
@@ -69,11 +76,11 @@ const useRecorder = () => {
         setIsRecording(false);
     };
 
-    return [isRecording, discardRecording,startRecording, stopRecording];
+    return [isUploadingDone, isRecording, discardRecording, startRecording, stopRecording];
 };
 
 async function requestRecorder() {
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     return new MediaRecorder(stream);
 }
 
