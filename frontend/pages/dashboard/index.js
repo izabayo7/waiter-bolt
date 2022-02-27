@@ -5,22 +5,73 @@ import arrow from '../../public/arrow.svg';
 import deleteIcon from '../../public/delete.svg';
 import icon from '../../public/icon.svg';
 import logout from '../../public/logout.svg';
-import reply from '../../public/reply.svg';
+import replyIcon from '../../public/replyIcon.svg';
 import styles from '../../styles/Dashboard.module.scss';
 import { useSelector } from "react-redux";
 import RequestService from "../../services/RequestService"
 import inputIcon from "../../public/inputIcon.svg"
 import RouteProtector from "../../middlewares/RouteProtector";
 import AuthService from "../../services/AuthService";
+import ReplyService from "../../services/ReplyService";
 
-const Reply = () => {
+const Reply = ({item}) => {
+    const [replyMessage,setReplyMessage] = useState("")
+
+    const handleSend=()=>{
+        try{
+            const form ={
+                body:replyMessage,
+                requestId:item.id
+            }
+            
+          const data=  ReplyService.create(form);
+          location.reload();
+        }catch{
+            e =>console.log(e)
+        }
+    }
     return (
         <div>
             <input placeholder="Write your reply"
-                className={styles.input} type="password" />
-
-            <img src={inputIcon.src} alt="reply icon" />
+                className={styles.input} type="text" onChange={(e)=>setReplyMessage(e.target.value)}/>
+            <img src={inputIcon.src} alt="reply icon" onClick={()=>handleSend()}/>
         </div>
+    )
+}
+
+
+const RequestItem =({item})=>{
+    const [showReply,setShowReply] = useState(false);
+
+    return(
+        <div className="">
+        <div className={'d-md-flex ' + styles.order}>
+            <div className={'d-flex col-md-11 ' + styles.orderContentContainer}>
+                <div>
+                    <img src={arrow.src} alt=""  style={{ cursor: "pointer" }} />
+                </div>
+                <div className={styles.orderContent}>
+                    {item.body}
+                </div>
+            </div>
+            <div className={'col-md-1 d-flex ' + styles.orderActions}>
+
+                <div><img src={replyIcon.src} alt="" onClick={() => setShowReply(true)} /></div>
+                <div><img src={deleteIcon.src} alt="" /></div>
+            </div>
+
+        </div>
+        <div>
+            <ul>
+            {item.responses.map((item)=>{
+                <li>{item.body}</li>
+            })}
+            </ul>
+        </div>
+        <div>
+           {showReply ? <Reply item={item}/>:<></>} 
+        </div>
+    </div>
     )
 }
 export function Page() {
@@ -67,7 +118,7 @@ export function Page() {
                             Waiter bolt
                         </div>
                         <div className={styles.logout}>
-                            <div onClick={()=>AuthService.logout()}>  <img src={logout.src} alt="" />
+                            <div onClick={() => AuthService.logout()}>  <img src={logout.src} alt="" />
                                 Logout</div>
                         </div>
                     </div>
@@ -77,23 +128,9 @@ export function Page() {
                     </div>
                     <div className={'col-12 mb-4'}>
                         {
-                            requests.map((item) => <div className={'d-md-flex ' + styles.order} key={item}>
-                                <div className={'d-flex col-md-11 ' + styles.orderContentContainer}>
-                                    <div>
-                                        <img src={arrow.src} alt="" onClick={() => setReply(true)} />
-                                    </div>
-                                    <div className={styles.orderContent}>
-                                        {item.body}
-                                    </div>
-                                </div>
-                                <div className={'col-md-1 d-flex ' + styles.orderActions}>
-                                    <div><img src={reply.src} alt="" /></div>
-                                    <div><img src={deleteIcon.src} alt="" /></div>
-                                </div>
-
-                            </div>)
+                            requests.map((item) =><RequestItem key={item} item={item}/>)
                         }
-                        {/*                        
+
                         <div className={styles.order + ' d-md-flex ' + styles.repliedOrder}>
                             <div className={'d-flex col-md-11 ' + styles.orderContentContainer}>
                                 <div>
@@ -106,7 +143,7 @@ export function Page() {
                             <div className={'col-md-1 d-flex ' + styles.repliedOrderActions}>
                                 <div><img src={deleteIcon.src} alt="" /></div>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
