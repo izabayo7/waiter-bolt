@@ -4,13 +4,14 @@ import React from "react";
 import icon from '../../public/icon.svg';
 import globalStyles from "../../styles/global-colors.module.css";
 import styles from '../../styles/Signin.module.scss';
-
+import AuthService  from "../../services/AuthService";
+import { useRouter } from "next/router";
 
 
 export function Login() {
 
     const [form, setForm] = React.useState({
-        login: "",
+        email: "",
         password: "",
     });
 
@@ -29,10 +30,19 @@ export function Login() {
     // }, [authUser])
 
 
-
     const handleFormChange = (property) => (event) => {
         setForm({ ...form, [property]: event.target.value });
     };
+
+     const router = useRouter();
+    const Login=()=>{
+        AuthService.login(form)
+        .then((res)=>{
+            AuthService.setToken(res.data.token);
+            router.push("/dashboard")
+            // console.log(res.data)
+        }).catch(e=>console.log(e))
+    }
 
 
     return (
@@ -56,13 +66,13 @@ export function Login() {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-10 text-center">
-                                <div><input placeholder="Enter your email" onChange={handleFormChange("login")}
+                                <div><input placeholder="Enter your email" onChange={handleFormChange("email")}
                                     className={styles.input} type="text" /></div>
                                 <div><input placeholder="Enter your Password" onChange={handleFormChange("password")}
-                                    className={styles.input} type="text" /></div>
+                                    className={styles.input} type="password" /></div>
 
 
-                                <button className={styles.button + " " + globalStyles.globalBackColor} onClick={() => login()}>{loading ? (
+                                <button className={styles.button + " " + globalStyles.globalBackColor} onClick={() => Login()}>{loading ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img
                                         src={"/img/loader.gif"}
