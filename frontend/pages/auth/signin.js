@@ -46,17 +46,17 @@ export function Login() {
             </div>
             <div className='row justify-content-center'>
                 <div className='col-7 mb-2'>
-                    <section className={`${styles.sectionOne} container shadow-lg `}>
+                    <section className={`${styles.sectionOne} container shadow-lg pt-5 pb-5 `}>
                         <div className='row justify-content-center'>
-                            <div className='col-5 pl-5'>
+                            <div className='col-5'>
                                 <div>
                                     <p className={'h5 ' + globalStyles.globalTextColor}>Welcome Back</p>
-                                    <p>Enter your credentials to access your account.</p>
+                                    <p className={styles.intr}>Enter your credentials to access your account.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="row justify-content-center">
-                            <div className="col-12 text-center">
+                            <div className="col-10 text-center">
                                 <div><input placeholder="Enter your email" onChange={handleFormChange("login")}
                                     className={styles.input} type="text" /></div>
                                 <div><input placeholder="Enter your Password" onChange={handleFormChange("password")}
@@ -79,6 +79,9 @@ export function Login() {
                             </div>
                         </div>
                     </section>
+                </div>
+                <div className='col-5 ml-5 pb-2'>
+                    <span className={styles.intr}>Don't have an account ? </span><span className={"cursor-pointer "+globalStyles.globalTextColor+ " "+styles.bottomLink} >Sign up</span>
                 </div>
             </div>
 
