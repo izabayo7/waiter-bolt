@@ -5,6 +5,7 @@ import RequestService from "../../services/RequestService";
 
 const useRecorder = () => {
     const [discard, setDiscard] = useState(false);
+    const [isUploadingDone, setIsUploadingDone] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [recorder, setRecorder] = useState(null);
 
@@ -54,8 +55,8 @@ const useRecorder = () => {
 
             if (res.data) {
                 console.log(res.data.message)
-                // setDiscard(URL.createObjectURL(e.data));
                 RequestService.sendOrder(res.data.message)
+                setIsUploadingDone(true)
             }
         };
 
@@ -66,6 +67,7 @@ const useRecorder = () => {
     const startRecording = () => {
         setIsRecording(true);
         setDiscard(false)
+        setIsUploadingDone(false)
     };
     const discardRecording = () => {
         setDiscard(true)
@@ -74,7 +76,7 @@ const useRecorder = () => {
         setIsRecording(false);
     };
 
-    return [isRecording, discardRecording, startRecording, stopRecording];
+    return [isUploadingDone, isRecording, discardRecording, startRecording, stopRecording];
 };
 
 async function requestRecorder() {

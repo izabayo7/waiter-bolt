@@ -14,7 +14,7 @@ import useRecorder from "./useRecorder";
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
 
-    let [isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
+    let [isUploadingDone, isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
 
     useEffect(() => {
         if (recordStatus == "RECORDED") {
@@ -69,7 +69,6 @@ const Record = () => {
                                 alt="record" className="mt-5"
                                 onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")} />
                         }
-
 
                     </div>
                     <div className={styles.pressCommandDesc}>
