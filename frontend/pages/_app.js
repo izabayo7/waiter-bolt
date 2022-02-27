@@ -1,26 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../styles/globals.css'
-import "../styles/loading.css";
-import {useEffect} from "react";
-import jwt from "jwt-decode";
-
-import {Provider, useDispatch} from 'react-redux';
-import 'react-clock/dist/Clock.css';
-import 'react-time-picker/dist/TimePicker.css';
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
 import Head from "next/head";
 import Router from 'next/router';
-import {APP_CONFIG} from "../utils/app-config"
-import AuthService from '../services/AuthService';
+import NProgress from 'nprogress'; //nprogress module
+import 'nprogress/nprogress.css'; //styles of nprogress
+import { useEffect } from "react";
 import 'react-clock/dist/Clock.css';
-import {updateJavaScriptObject} from "../utils/functions.js"
-import {createStore} from "redux";
+import { Toaster } from "react-hot-toast";
+import { Provider, useDispatch } from 'react-redux';
+import 'react-time-picker/dist/TimePicker.css';
+import { createStore } from "redux";
+import AuthService from '../services/AuthService';
+import { setAuthUser } from "../store/actions";
 import reducer from '../store/reducers';
-import UserService from "../services/UserService"
-import {setAuthUser} from "../store/actions";
+// import '../styles/globals.css'
+import "../styles/loading.css";
+import { APP_CONFIG } from "../utils/app-config";
 
-NProgress.configure({showSpinner: false});
+
+NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
@@ -76,18 +73,16 @@ function AppMeta() {
 }
 
 
-function MyApp({Component, pageProps}) {
+function MyApp({ Component, pageProps }) {
 
     return (
         <Provider store={store}>
-                    <AppMeta/>
-         <Component {...pageProps} />
-
-           </Provider>
+            <AppMeta />
+            <Component {...pageProps} />
+            <Toaster />
+        </Provider>
     )
 
 }
 
 export default MyApp;
-
-
