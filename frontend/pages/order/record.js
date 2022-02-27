@@ -25,7 +25,6 @@ const Record = () => {
             toast.success("Recording stopped")
             stopRecording();
         } else if (isRecording && recordStatus == "NOT_RECORDED") {
-            toast.error("Recording discarded")
             discardRecording()
         }
     }, [recordStatus]);
