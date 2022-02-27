@@ -19,6 +19,7 @@ specifiers:
   react-bootstrap: ^1.4.3
   react-datetime-picker: ^3.4.2
   react-dom: ^17.0.2
+  react-hot-toast: ^2.2.0
   react-js-pagination: ^3.0.3
   react-redux: ^7.2.4
   react-select: ^4.3.1
@@ -46,6 +47,7 @@ dependencies:
   react: 17.0.2
   react-bootstrap: 1.6.4_react-dom@17.0.2+react@17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-hot-toast: 2.2.0_react-dom@17.0.2+react@17.0.2
   react-js-pagination: 3.0.3
   react-select: 4.3.1_react-dom@17.0.2+react@17.0.2
   react-table: 7.7.0_react@17.0.2
@@ -2071,6 +2073,12 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /goober/2.1.8:
+    resolution: {integrity: sha512-S0C85gCzcfFCMSdjD/CxyQMt1rbf2qEg6hmDzxk2FfD7+7Ogk55m8ZFUMtqNaZM4VVX/qaU9AzSORG+Gf4ZpAQ==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dev: false
+
   /got/9.6.0:
     resolution: {integrity: sha512-R7eWptXuGYxwijs0eV+v3o6+XH1IqVK8dJOEecQfTmkncw9AV4dcw/Dhxi8MdlqPthxxpZyizMzyg8RTmEsG+Q==}
     engines: {node: '>=8.6'}
@@ -3479,6 +3487,20 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       tiny-warning: 1.0.3
+
+  /react-hot-toast/2.2.0_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.8
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    transitivePeerDependencies:
+      - csstype
+    dev: false
 
   /react-input-autosize/3.0.0_react@17.0.2:
     resolution: {integrity: sha512-nL9uS7jEs/zu8sqwFE5MAPx6pPkNAriACQ2rGLlqmKr2sPGtN7TXTyDdQt4lbNXVx7Uzadb40x8qotIuru6Rhg==}
