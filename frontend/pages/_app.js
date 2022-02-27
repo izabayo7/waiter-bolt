@@ -18,6 +18,7 @@ import {updateJavaScriptObject} from "../utils/functions.js"
 import {createStore} from "redux";
 import reducer from '../store/reducers';
 import UserService from "../services/UserService"
+import {setAuthUser} from "../store/actions";
 
 NProgress.configure({showSpinner: false});
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -52,13 +53,12 @@ function AppMeta() {
     useEffect(() => {
         setUser();
     })
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const setUser = () => {
         if (AuthService.isLoggedIn()) {
             if (!AuthService.tokenExpired()) {
                 const token = AuthService.getDecToken()
-                // console.log(jwt(token))
                 AuthService.getMe().then((res) => {
                     dispatch(setAuthUser(res.data.data));
                 }).catch(e => console.log(e))
@@ -79,11 +79,11 @@ function AppMeta() {
 function MyApp({Component, pageProps}) {
 
     return (
-            <div>
+        <Provider store={store}>
                     <AppMeta/>
          <Component {...pageProps} />
 
-            </div>
+           </Provider>
     )
 
 }
