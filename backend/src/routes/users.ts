@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
-import prisma from "../client";
 import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import prisma from "../client";
+
 
 export async function getUsers(_req: Request, res: Response) {
         const user = await prisma.user.findMany();
@@ -83,12 +84,30 @@ export async function login(req: Request, res: Response) {
                 },
                 "secret",
                 {
-                        expiresIn: "1h",
+                        expiresIn: "24h",
                 }
         );
 
         return res.json({
                 token,
                 user,
+        });
+}
+
+
+
+export async function me(req: Request, res: Response) {
+
+        //@ts-ignore
+        const id = parseInt(req.userId);
+
+        const user = await prisma.user.findUnique({
+                where: {
+                        id,
+                },
+        });
+
+        return res.json({
+                data: user,
         });
 }
