@@ -14,6 +14,12 @@ class RequestService {
         return http.get("/requests/" + id)
     }
 
+    sendOrder(message) {
+        return http.post("/requests", {
+            body: message
+        })
+    }
+
     delete(id) {
         return http.delete("/requests/" + id)
     }
