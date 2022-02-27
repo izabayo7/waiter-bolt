@@ -48,6 +48,50 @@ export async function createUser(req: Request, res: Response) {
         // const hashedPassword = await bcrypt.hash(password, 10);
 }
 
+
+export async function updateUser(req: Request, res: Response) {
+        const { name, password, email, status } = req.body;
+        const id = parseInt(req.params.id);
+
+        if (!name || !password || !email || !status) {
+                return res.status(400).json({
+                        error: "Please provide all required fields",
+                });
+        }
+
+        try {
+                // const findUser = await prisma.user.findUnique({
+                //         where: {
+                //                 email,
+                //         },
+                // });
+
+                // if (findUser) {
+                //         return res
+                //                 .status(400)
+                //                 .json({ message: "user already exists" });
+                // }
+
+                let statuses = status as any;
+
+                const hashedPassword = await bcrypt.hash(password, 12);
+
+                const createdUser = await prisma.user.update({
+                        data: {
+                                name,
+                                password: hashedPassword,
+                                email,
+                                status: statuses
+                        },
+                        where: { id }
+                });
+
+                return res.json({ data: createdUser });
+        } catch (e) {
+                res.status(401).json({ message: e });
+        }
+}
+
 export async function login(req: Request, res: Response) {
         const { email, password } = req.body;
 

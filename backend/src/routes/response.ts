@@ -5,7 +5,12 @@ export async function getAllResponses(req: Request, res: Response) {
     const responses = await prisma.response.findMany({
         include: {
             request: true,
-        }
+        },
+        orderBy: [
+            {
+                createdAt: "desc",
+            }
+        ]
     })
     return res.json({ data: responses })
 }
