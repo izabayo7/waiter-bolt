@@ -6,9 +6,10 @@ import icon from '../../public/icon.svg';
 import cancelIcon from "../../public/cancelIcon.svg"
 import loadingRecordingIcon from "../../public/loadingRecordingIcon.svg"
 import styles from "../../styles/pages/record.module.css"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import globalStyles from "../../styles/global-colors.module.css";
 import useRecorder from "./useRecorder";
+import RouteProtector from "../../middlewares/RouteProtector";
 
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
@@ -91,4 +92,13 @@ const Record = () => {
         </div>
     )
 }
-export default Record;
+
+const ProtectPage = () => {
+    return (
+
+        <RouteProtector>
+            <Record />
+        </RouteProtector>
+    )
+}
+export default ProtectPage
