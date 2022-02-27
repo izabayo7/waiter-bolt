@@ -1,0 +1,80 @@
+.navBar{
+  background-color: #FBFAFB;
+  padding: 26px 45px;
+  .div {
+    display: flex;
+    place-items: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+  }
+}
+
+.logout{
+  margin-left: auto;
+  display: flex;
+  place-items: center;
+}
+.image{
+  width: 59px;
+}
+.svg{
+  width: 24px;
+}
+
+.title{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
+margin-bottom: 14px;
+  margin-top: 78px;
+  color: #B2BFC7;
+}
+.subtitle{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+margin-bottom: 11px;
+  color: #B2BFC7;
+
+}
+
+.order{
+  width: 1224px;
+  height: 111px;
+margin: 30px auto 0px;
+  background: #FFFFFF;
+  box-shadow: 0px 14px 24px rgba(89, 203, 183, 0.2);
+}
+.repliedOrder{
+  background: #FBFAFB;
+  box-shadow: none;
+}
+.orderContent{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #40597C;
+}
+.orderContentReplied{
+  color: #000000;
+}
+.orderContentContainer{
+  padding: 17px 13px !important;
+}
+.orderActions{
+  place-items: center;
+  justify-content: space-between;
+}
+.repliedOrderActions{
+  justify-content: right;
+  margin-top: auto;
+  margin-bottom: auto;
+}
