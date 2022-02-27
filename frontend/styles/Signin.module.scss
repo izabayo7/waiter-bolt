@@ -1,9 +1,15 @@
 .sectionOne {
-    min-height: 500px;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 30px;
   }
-  
+  .bottomLink{
+    text-decoration: underline;
+    cursor: pointer; 
+  }
+  .intr{
+    font-size:0.8em;
+    color:#A7B6BF;
+  }
   .getStartedButton{
       background-color: #FC8604;
   }
