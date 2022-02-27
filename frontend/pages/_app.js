@@ -59,11 +59,8 @@ function AppMeta() {
             if (!AuthService.tokenExpired()) {
                 const token = AuthService.getDecToken()
                 // console.log(jwt(token))
-                UserService.get(jwt(token).userId).then((res) => {
-                    console.log("data",res.data)
-                    const curr_user = updateJavaScriptObject(jwt(token), res.data)
-                    // curr_user.fullNames = res.data.firstName + " " + res.data.lastName
-                    // dispatch(setAuthUser(curr_user));
+                AuthService.getMe().then((res) => {
+                    dispatch(setAuthUser(res.data.data));
                 }).catch(e => console.log(e))
             }
         }
