@@ -5,6 +5,9 @@ export async function getAllRequests(req: Request, res: Response) {
     const requests = await prisma.request.findMany({
         include: {
             responses: true
+        },
+        orderBy: {
+            createdAt: "desc"
         }
     })
 
