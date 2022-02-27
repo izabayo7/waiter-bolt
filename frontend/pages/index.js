@@ -29,7 +29,6 @@ export function Page() {
             <div style={{
                 display: "flex",
             }}>
-
                 <div>
 
 

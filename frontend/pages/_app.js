@@ -6,11 +6,15 @@ import 'nprogress/nprogress.css'; //styles of nprogress
 import { useEffect } from "react";
 import 'react-clock/dist/Clock.css';
 import { Toaster } from "react-hot-toast";
+import { Provider, useDispatch } from 'react-redux';
 import 'react-time-picker/dist/TimePicker.css';
 import { createStore } from "redux";
 import AuthService from '../services/AuthService';
 import { setAuthUser } from "../store/actions";
 import reducer from '../store/reducers';
+// import '../styles/globals.css'
+import "../styles/loading.css";
+import { APP_CONFIG } from "../utils/app-config";
 
 
 NProgress.configure({ showSpinner: false });
@@ -24,6 +28,9 @@ if (typeof window !== "undefined") {
     require('popper.js');
     require('bootstrap');
 }
+
+
+
 
 let store = createStore(reducer);
 
@@ -69,19 +76,11 @@ function AppMeta() {
 function MyApp({ Component, pageProps }) {
 
     return (
-<<<<<<< HEAD
-        <div>
+        <Provider store={store}>
             <AppMeta />
             <Component {...pageProps} />
             <Toaster />
-        </div>
-=======
-        <Provider store={store}>
-                    <AppMeta/>
-         <Component {...pageProps} />
-
-           </Provider>
->>>>>>> origin/main
+        </Provider>
     )
 
 }
