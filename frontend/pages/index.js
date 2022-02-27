@@ -43,7 +43,7 @@ export function Page() {
                             <p className={styles.minParText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nibh elit..</p>
                         </div>
                         <div className='mt-5'>
-                            <button className={"btn px-4 py-2 text-white " + styles.getStartedButton}>Get Started</button>
+                            <button className={"btn px-4 py-2 text-white " + styles.getStartedButton} onClick={()=>router.push("/auth/signin")}>Get Started</button>
                         </div>
                         <div />
                     </div>
