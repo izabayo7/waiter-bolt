@@ -130,20 +130,6 @@ export function Page() {
                         {
                             requests.map((item) =><RequestItem key={item} item={item}/>)
                         }
-
-                        <div className={styles.order + ' d-md-flex ' + styles.repliedOrder}>
-                            <div className={'d-flex col-md-11 ' + styles.orderContentContainer}>
-                                <div>
-                                    <img src={arrow.src} alt="" />
-                                </div>
-                                <div className={styles.orderContent + ' ' + styles.orderContentReplied}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eleifend vel ipsum proin. Et facilisi vitae metus, mattis et sed etiam et. Augue nibh urna, nunc faucibus quisque nibh. Nulla scelerisque convallis risus molestie sed. Proin sem suscipit nisl ultrices.
-                                </div>
-                            </div>
-                            <div className={'col-md-1 d-flex ' + styles.repliedOrderActions}>
-                                <div><img src={deleteIcon.src} alt="" /></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
