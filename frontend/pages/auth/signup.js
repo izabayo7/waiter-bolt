@@ -1,11 +1,10 @@
-import styles from '../../styles/Signin.module.scss'
+import Link from "next/link";
 // import RouteService from "../services/auth/routing"
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import icon from '../../public/icon.svg';
 import globalStyles from "../../styles/global-colors.module.css";
-import icon from '../../public/icon.svg'
+import styles from '../../styles/Signin.module.scss';
 
-import Router from "next/router"
 
 
 export function Login() {
@@ -57,7 +56,7 @@ export function Login() {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-10 text-center">
-                            <div><input placeholder="Enter your names" onChange={handleFormChange("login")}
+                                <div><input placeholder="Enter your names" onChange={handleFormChange("login")}
                                     className={styles.input} type="text" /></div>
                                 <div><input placeholder="Enter your email" onChange={handleFormChange("login")}
                                     className={styles.input} type="text" /></div>
@@ -83,7 +82,7 @@ export function Login() {
                     </section>
                 </div>
                 <div className='col-5 ml-5 pb-3'>
-                    <span className={styles.intr}>Already have an account ? </span><span className={"cursor-pointer "+globalStyles.globalTextColor+" "+styles.bottomLink} >Signin</span>
+                    <span className={styles.intr}>Already have an account ? </span><Link href="/auth/signin" className={"cursor-pointer " + globalStyles.globalTextColor + " " + styles.bottomLink} >Signin</Link>
                 </div>
             </div>
 
