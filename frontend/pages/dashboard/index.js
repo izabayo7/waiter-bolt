@@ -42,7 +42,7 @@ const Reply = ({item}) => {
 
 const RequestItem =({item})=>{
     const [showReply,setShowReply] = useState(false);
-
+     console.log("data ",item.responses)
     return(
         <div className="">
         <div className={'d-md-flex ' + styles.order}>
@@ -63,9 +63,7 @@ const RequestItem =({item})=>{
         </div>
         <div>
             <ul>
-            {item.responses.map((item)=>{
-                <li>{item.body}</li>
-            })}
+             {/* {item.responses[item.responses.length()-1]} */}
             </ul>
         </div>
         <div>

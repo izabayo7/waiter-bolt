@@ -51,7 +51,7 @@ export function Page() {
                     </div>
                     <div className='col-7'>
                         <div className='float-right mt-4'>
-                            <Link href="/auth/signin" className={'btn px-4 py-2 text-white ' + styles.getStartedButton}>Signin</Link>
+                            <button onClick={()=>router.push("/auth/signin")} className={'btn px-4 py-2 text-white ' + styles.getStartedButton}>Signin</button>
                             <button className={"btn px-4 py-2 text-white ml-4 " + styles.getStartedButton} onClick={() => router.push("/order/record")}>Order Now</button>
                         </div>
                         <div className='mt-4'>
