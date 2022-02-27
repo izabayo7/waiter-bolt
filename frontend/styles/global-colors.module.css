@@ -3,7 +3,7 @@
     color:#FC8604;;
 }
 .globalHoverBackColor:hover{
-    background-color:#FC8604;;
+    background-color:#FC8604;
     transition: all 0.4s ease-in-out;
 }
 
