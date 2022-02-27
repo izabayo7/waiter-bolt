@@ -1,11 +1,10 @@
-import styles from '../../styles/Signin.module.scss'
 // import RouteService from "../services/auth/routing"
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
+import React from "react";
+import icon from '../../public/icon.svg';
 import globalStyles from "../../styles/global-colors.module.css";
-import icon from '../../public/icon.svg'
+import styles from '../../styles/Signin.module.scss';
 
-import Router from "next/router"
 
 
 export function Login() {
@@ -81,7 +80,7 @@ export function Login() {
                     </section>
                 </div>
                 <div className='col-5 ml-5 pb-2'>
-                    <span className={styles.intr}>Don't have an account ? </span><span className={"cursor-pointer "+globalStyles.globalTextColor+ " "+styles.bottomLink} >Sign up</span>
+                    <span className={styles.intr}>Don't have an account ? </span><Link href="/auth/signup" className={"cursor-pointer " + globalStyles.globalTextColor + " " + styles.bottomLink} >Sign up</Link>
                 </div>
             </div>
 

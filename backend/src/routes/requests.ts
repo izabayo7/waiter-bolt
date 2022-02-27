@@ -2,16 +2,39 @@ import { Request, Response } from "express"
 import prisma from "../client"
 
 export async function getAllRequests(req: Request, res: Response) {
-    const requests = await prisma.request.findMany()
+    const requests = await prisma.request.findMany({
+        include: {
+            responses: true
+        }
+    })
 
-    return res.send(requests)
+    return res.json({ data: requests })
+}
+
+
+export async function getRequestsByUser(req: Request, res: Response) {
+
+    //@ts-ignore
+    const userId = parseInt(req.userId)
+
+    const requests = await prisma.request.findMany({
+        where: {
+            userId
+        },
+        include: {
+            responses: true,
+            user: true
+        }
+    })
+
+    return res.json({ data: requests })
 }
 
 
 export async function createRequest(req: Request, res: Response) {
     const { body } = req.body
 
-    if (body.length < 5) {
+    if (!body) {
         return res.status(400).json({ message: "Body is missing" })
     }
 
