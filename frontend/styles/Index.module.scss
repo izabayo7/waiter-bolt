@@ -7,9 +7,15 @@
 .getStartedButton{
     background-color: #FC8604;
 }
-
+.absolute{
+  position: absolute;
+  top: 0;
+  left: 65px;
+}
 .bgLeft{
   background-color: #FBFAFB;
+  width: 427px;
+  height: 100vh;
 }
 .minParText{
   color: #A5A5A5;

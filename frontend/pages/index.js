@@ -32,10 +32,27 @@ export function Page() {
                 <div>
 
 
+                    <div className={'col-5 pl-0'}>
+                        <div className={styles.bgLeft}></div>
+                        <div className={styles.absolute}>
+                            <img src={icon.src} alt="" />
+                            Waiter bolt
+                            <div className='mt-5 ml-md-5'>
+                                <p className='h3'>Lorem ipsum dolor sit amet, consectetur.</p>
+                            </div>
+                            <div className={'ml-md-5'}>
+                                <p className={styles.minParText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nibh elit..</p>
+                            </div>
+                            <div className='mt-5 ml-md-5'>
+                                <button className={"btn px-4 py-2 text-white " + styles.getStartedButton} onClick={() => router.push("/auth/signin")}>Get Started</button>
+                            </div>
+                            <div />
+                        </div>
+                    </div>
                     <div className='col-7'>
                         <div className='float-right mt-4'>
-                            <span className='mr-3'> Signin</span>
-                            <button onClick={() => router.push("/order/record")} className={'btn px-4 py-2 text-white ' + styles.getStartedButton}>Order Now</button>
+                            <Link href="/auth/signin" className={'btn px-4 py-2 text-white ' + styles.getStartedButton}>Signin</Link>
+                            <button className={"btn px-4 py-2 text-white ml-4 " + styles.getStartedButton} onClick={() => router.push("/order/record")}>Order Now</button>
                         </div>
                         <div className='mt-4'>
                             <img src='background.png' />
