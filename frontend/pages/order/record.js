@@ -1,15 +1,15 @@
-import {APP_CONFIG} from "../../utils/app-config";
-import axios from 'axios'
-import recordIcon from "../../public/recordIcon.svg"
-import sendIcon from "../../public/sendIcon.svg";
-import icon from '../../public/icon.svg';
-import cancelIcon from "../../public/cancelIcon.svg"
-import loadingRecordingIcon from "../../public/loadingRecordingIcon.svg"
-import styles from "../../styles/pages/record.module.css"
-import React, {useEffect, useState} from "react";
-import globalStyles from "../../styles/global-colors.module.css";
-import useRecorder from "./useRecorder";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import RouteProtector from "../../middlewares/RouteProtector";
+import cancelIcon from "../../public/cancelIcon.svg";
+import icon from '../../public/icon.svg';
+import loadingRecordingIcon from "../../public/loadingRecordingIcon.svg";
+import recordIcon from "../../public/recordIcon.svg";
+import sendIcon from "../../public/sendIcon.svg";
+import globalStyles from "../../styles/global-colors.module.css";
+import styles from "../../styles/pages/record.module.css";
+import { APP_CONFIG } from "../../utils/app-config";
+import useRecorder from "./useRecorder";
 
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
@@ -17,19 +17,24 @@ const Record = () => {
     let [isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
 
     useEffect(() => {
-        if (recordStatus == "RECORDED")
+        if (recordStatus == "RECORDED") {
+            toast.success("Recording started...")
             startRecording();
-        else if (recordStatus == "LOADING")
+        }
+        else if (recordStatus == "LOADING") {
+            toast.success("Recording stopped")
             stopRecording();
-        else if (isRecording && recordStatus == "NOT_RECORDED")
+        } else if (isRecording && recordStatus == "NOT_RECORDED") {
+            toast.error("Recording discarded")
             discardRecording()
+        }
     }, [recordStatus]);
 
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-4 text-center">
-                    <img src={icon.src} alt=""/>
+                    <img src={icon.src} alt="" />
                     {APP_CONFIG.APP_NAME}
                 </div>
             </div>
@@ -38,11 +43,11 @@ const Record = () => {
                     <div className="float-right">
                         {recordStatus == "RECORDED" ?
                             <img src={cancelIcon.src} alt="cancel" className={styles.cancelIcon}
-                                 onClick={() => setRecordStatus("NOT_RECORDED")}/> : recordStatus == "SENT" ? <button
-                                className={"btn px-3 py-2 " + globalStyles.globalTextColor + " " + styles.newOrderBtn}
-                                onClick={() => {
-                                    setRecordStatus("NOT_RECORDED")
-                                }}>New Order</button> : <></>}
+                                onClick={() => setRecordStatus("NOT_RECORDED")} /> : recordStatus == "SENT" ? <button
+                                    className={"btn px-3 py-2 " + globalStyles.globalTextColor + " " + styles.newOrderBtn}
+                                    onClick={() => {
+                                        setRecordStatus("NOT_RECORDED")
+                                    }}>New Order</button> : <></>}
                     </div>
                     <div className={"pl-5 " + styles.recordIcon}>
 
@@ -62,20 +67,9 @@ const Record = () => {
                             <img
                                 src={recordStatus == "NOT_RECORDED" ? recordIcon.src : recordStatus == "LOADING" ? loadingRecordingIcon.src : sendIcon.src}
                                 alt="record" className="mt-5"
-                                onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")}/>
+                                onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")} />
                         }
-                        <div className={`${styles.middle} ${recordStatus == 'NOT_RECORDED' ? styles.hide : ''}`}>
-                            <div className={`${styles.bar} ${styles.bar1}`}></div>
-                            <div className={`${styles.bar} ${styles.bar2}`}></div>
-                            <div className={`${styles.bar} ${styles.bar3}`}></div>
-                            <div className={`${styles.bar} ${styles.bar4}`}></div>
-                            <div className={`${styles.bar} ${styles.bar5}`}></div>
-                            <div className={`${styles.bar} ${styles.bar6}`}></div>
-                            <div className={`${styles.bar} ${styles.bar7}`}></div>
-                            <div className={`${styles.bar} ${styles.bar8}`}></div>
-                            <br/>
-                            {recordStatus == 'RECORDED' ? 'Recording' : 'Uploading'}
-                        </div>
+
 
                     </div>
                     <div className={styles.pressCommandDesc}>
