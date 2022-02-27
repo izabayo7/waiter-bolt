@@ -28,6 +28,7 @@ specifiers:
   react-toastify: ^7.0.3
   redux: ^4.1.1
   sass: ^1.36.0
+  swr: ^1.2.2
   validatorjs: ^3.22.1
   yarn-install: ^1.0.0
 
@@ -55,6 +56,7 @@ dependencies:
   react-toastify: 7.0.4_react-dom@17.0.2+react@17.0.2
   redux: 4.1.2
   sass: 1.49.9
+  swr: 1.2.2_react@17.0.2
   validatorjs: 3.22.1
   yarn-install: 1.0.0
 
@@ -4160,6 +4162,14 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /swr/1.2.2_react@17.0.2:
+    resolution: {integrity: sha512-ky0BskS/V47GpW8d6RU7CPsr6J8cr7mQD6+do5eky3bM0IyJaoi3vO8UhvrzJaObuTlGhPl2szodeB2dUd76Xw==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /table/6.8.0:
     resolution: {integrity: sha512-s/fitrbVeEyHKFa7mFdkuQMWlH1Wgw/yEXMt5xACT4ZpzWFluehAxRtUUQKPuWhaLAWhFcVx6w3oC8VKaUfPGA==}
