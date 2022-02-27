@@ -1,6 +1,6 @@
 import http from "./http-common";
 
-class MeterAccountService {
+class UserService {
 
     create(data) {
         return http.post("/meter-account", data)
@@ -21,4 +21,4 @@ class MeterAccountService {
 
 }
 
-export default new MeterAccountService
+export default new UserService

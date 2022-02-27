@@ -1,5 +1,4 @@
 import axios from "axios";
-// export const domain = "https://att-management-backend.herokuapp.com";
 
 export const domain ="http://localhost:4500"
 
