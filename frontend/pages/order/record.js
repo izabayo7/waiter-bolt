@@ -8,15 +8,21 @@ import loadingRecordingIcon from "../../public/loadingRecordingIcon.svg"
 import styles from "../../styles/pages/record.module.css"
 import {useEffect, useState} from "react";
 import globalStyles from "../../styles/global-colors.module.css";
-import RequestService from "../../services/RequestService";
 import useRecorder from "./useRecorder";
 
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
-    const [recorder,setRecorder]= useState()
-    const [gumStream,setgumStream]= useState()
 
-    let [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
+    let [isRecording, discardRecording,startRecording, stopRecording] = useRecorder();
+
+    useEffect(() => {
+        if (recordStatus == "RECORDED")
+            startRecording();
+        else if (recordStatus == "LOADING")
+            stopRecording();
+        else if (isRecording && recordStatus == "NOT_RECORDED")
+            discardRecording()
+    }, [recordStatus]);
 
     return (
         <div className="container">
@@ -41,19 +47,22 @@ const Record = () => {
 
                         {recordStatus == "SENT" ?
                             <p className={"h5 mt-5 " + globalStyles.globalTextColor}>Your order will be ready in 10
-                                minutes.</p> : <img
+                                minutes.</p> :
+                            // <img
+                            //     src={recordStatus == "NOT_RECORDED" ? recordIcon.src : recordStatus == "LOADING" ? loadingRecordingIcon.src : sendIcon.src}
+                            //     alt="record" className="mt-5" onClick={() => {
+                            //     setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "pl-5")
+                            //     // if (recordStatus == "NOT_RECORDED")
+                            //     //     startRecording();
+                            //     // else if (recordStatus != "LOADING"){
+                            //     //     stopRecording();
+                            //     // }
+                            // }}/>
+                            <img
                                 src={recordStatus == "NOT_RECORDED" ? recordIcon.src : recordStatus == "LOADING" ? loadingRecordingIcon.src : sendIcon.src}
-                                alt="record" className="mt-5" onClick={() => {
-                                if (recordStatus == "NOT_RECORDED")
-
-                                    startRecording();
-                                else if (recordStatus != "LOADING"){
-                                    stopRecording();
-                                }
-
-
-                                setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "pl-5")
-                            }}/>}
+                                alt="record" className="mt-5"
+                                onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")}/>
+                        }
 
                     </div>
                     <div className={styles.pressCommandDesc}>

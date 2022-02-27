@@ -3,7 +3,7 @@ import axios from "axios";
 import RequestService from "../../services/RequestService";
 
 const useRecorder = () => {
-    const [audioURL, setAudioURL] = useState("");
+    const [discard, setDiscard] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [recorder, setRecorder] = useState(null);
 
@@ -26,6 +26,9 @@ const useRecorder = () => {
         // Obtain the audio when ready.
         const handleData = async e => {
 
+            if (discard)
+                return
+
             let data = new FormData();
 
             data.append('paris', -1000);
@@ -45,8 +48,8 @@ const useRecorder = () => {
             const res = await axios.post("https://cors-anywhere.herokuapp.com/" + 'https://mbaza.dev.cndp.org.rw/deepspeech/api/api/v1/stt/http', data, config);
             console.log(res)
             if (res.data) {
-                // res.data.message
-                // setAudioURL(URL.createObjectURL(e.data));
+                console.log(res.data.message)
+                // setDiscard(URL.createObjectURL(e.data));
                 RequestService.sendOrder(res.data.message)
             }
         };
@@ -57,13 +60,16 @@ const useRecorder = () => {
 
     const startRecording = () => {
         setIsRecording(true);
+        setDiscard(false)
     };
-
+    const discardRecording = () => {
+        setDiscard(true)
+    }
     const stopRecording = () => {
         setIsRecording(false);
     };
 
-    return [audioURL, isRecording, startRecording, stopRecording];
+    return [isRecording, discardRecording,startRecording, stopRecording];
 };
 
 async function requestRecorder() {
