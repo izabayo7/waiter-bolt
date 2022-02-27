@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:Y5uFiaWQLA2POnmYInwk@containers-us-west-26.railway.app:7933/railway"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  type     UserType @default(ADMIN)
+
+  requests Request[]
+}
+
+model Request {
+  id        Int           @id @default(autoincrement())
+  userId    Int
+  body      String
+  status    RequestStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
+  user      User          @relation(fields: [userId], references: [id])
+
+  responses Response[]
+}
+
+model Response {
+  id        Int            @id @default(autoincrement())
+  requestId Int
+  body      String
+  status    ResponseStatus @default(OPEN)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  request   Request        @relation(fields: [requestId], references: [id])
+}
+
+enum ResponseStatus {
+  CLOSED
+  OPEN
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum UserType {
+  ADMIN
+  BOT
+  USER
+}
