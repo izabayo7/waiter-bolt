@@ -5,9 +5,16 @@
     width: 100%;
     margin-left: -0.95em;
 }
+.newOrderBtn{
+    border:2px solid #FC8604;
+}
 
 .recordDiv{
     height:350px;
+}
+
+.cancelIcon{
+    cursor: pointer;
 }
 
 .recordIcon{
