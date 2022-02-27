@@ -9,10 +9,8 @@ import { Toaster } from "react-hot-toast";
 import 'react-time-picker/dist/TimePicker.css';
 import { createStore } from "redux";
 import AuthService from '../services/AuthService';
+import { setAuthUser } from "../store/actions";
 import reducer from '../store/reducers';
-// import '../styles/globals.css'
-import "../styles/loading.css";
-import { APP_CONFIG } from "../utils/app-config";
 
 
 NProgress.configure({ showSpinner: false });
@@ -45,13 +43,12 @@ function AppMeta() {
     useEffect(() => {
         setUser();
     })
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const setUser = () => {
         if (AuthService.isLoggedIn()) {
             if (!AuthService.tokenExpired()) {
                 const token = AuthService.getDecToken()
-                // console.log(jwt(token))
                 AuthService.getMe().then((res) => {
                     dispatch(setAuthUser(res.data.data));
                 }).catch(e => console.log(e))
@@ -72,11 +69,19 @@ function AppMeta() {
 function MyApp({ Component, pageProps }) {
 
     return (
+<<<<<<< HEAD
         <div>
             <AppMeta />
             <Component {...pageProps} />
             <Toaster />
         </div>
+=======
+        <Provider store={store}>
+                    <AppMeta/>
+         <Component {...pageProps} />
+
+           </Provider>
+>>>>>>> origin/main
     )
 
 }

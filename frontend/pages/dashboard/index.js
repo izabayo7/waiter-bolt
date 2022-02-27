@@ -10,6 +10,8 @@ import styles from '../../styles/Dashboard.module.scss';
 import { useSelector } from "react-redux";
 import RequestService from "../../services/RequestService"
 import inputIcon from "../../public/inputIcon.svg"
+import RouteProtector from "../../middlewares/RouteProtector";
+import AuthService from "../../services/AuthService";
 
 const Reply = () => {
     return (
@@ -43,7 +45,11 @@ export function Page() {
     }, [])
 
     const [reply, setReply] = useState(false);
+    const authUser = useSelector(state => state.authUser)
 
+    useEffect(() => {
+        console.log("Curr user ", authUser)
+    }, [authUser])
     return (
         <Fragment>
 
@@ -61,30 +67,30 @@ export function Page() {
                             Waiter bolt
                         </div>
                         <div className={styles.logout}>
-                            <img src={logout.src} alt="" />
-                            Logout
+                            <div onClick={()=>AuthService.logout()}>  <img src={logout.src} alt="" />
+                                Logout</div>
                         </div>
                     </div>
                     <div className={'col-12 text-center'}>
-                        <div className={styles.title}>Hello Makuza !</div>
+                        <div className={styles.title}>Hello {authUser.name} !</div>
                         <div className={styles.subtitle}>Here are the orders from your clients</div>
                     </div>
                     <div className={'col-12 mb-4'}>
                         {
-                            [0, 1, 2, 3, 4].map((item) => <div className={'d-md-flex ' + styles.order} key={item}>
+                            requests.map((item) => <div className={'d-md-flex ' + styles.order} key={item}>
                                 <div className={'d-flex col-md-11 ' + styles.orderContentContainer}>
                                     <div>
                                         <img src={arrow.src} alt="" onClick={() => setReply(true)} />
                                     </div>
                                     <div className={styles.orderContent}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eleifend vel ipsum proin. Et facilisi vitae metus, mattis et sed etiam et. Augue nibh urna, nunc faucibus quisque nibh. Nulla scelerisque convallis risus molestie sed. Proin sem suscipit nisl ultrices.
+                                        {item.body}
                                     </div>
                                 </div>
                                 <div className={'col-md-1 d-flex ' + styles.orderActions}>
                                     <div><img src={reply.src} alt="" /></div>
                                     <div><img src={deleteIcon.src} alt="" /></div>
                                 </div>
-                              
+
                             </div>)
                         }
                         {/*                        
@@ -109,4 +115,12 @@ export function Page() {
     )
 }
 
-export default Page
+const ProtectPage = () => {
+    return (
+
+        <RouteProtector>
+            <Page />
+        </RouteProtector>
+    )
+}
+export default ProtectPage
