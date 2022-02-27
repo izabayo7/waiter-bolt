@@ -6,14 +6,15 @@ import icon from '../../public/icon.svg';
 import cancelIcon from "../../public/cancelIcon.svg"
 import loadingRecordingIcon from "../../public/loadingRecordingIcon.svg"
 import styles from "../../styles/pages/record.module.css"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import globalStyles from "../../styles/global-colors.module.css";
 import useRecorder from "./useRecorder";
+import RouteProtector from "../../middlewares/RouteProtector";
 
 const Record = () => {
     const [recordStatus, setRecordStatus] = useState("NOT_RECORDED");
 
-    let [isRecording, discardRecording,startRecording, stopRecording] = useRecorder();
+    let [isRecording, discardRecording, startRecording, stopRecording] = useRecorder();
 
     useEffect(() => {
         if (recordStatus == "RECORDED")
@@ -27,7 +28,7 @@ const Record = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-4">
+                <div className="col-4 text-center">
                     <img src={icon.src} alt=""/>
                     {APP_CONFIG.APP_NAME}
                 </div>
@@ -63,6 +64,18 @@ const Record = () => {
                                 alt="record" className="mt-5"
                                 onClick={() => setRecordStatus(recordStatus == "RECORDED" ? "LOADING" : recordStatus == "LOADING" ? "SENT" : "RECORDED")}/>
                         }
+                        <div className={`${styles.middle} ${recordStatus == 'NOT_RECORDED' ? styles.hide : ''}`}>
+                            <div className={`${styles.bar} ${styles.bar1}`}></div>
+                            <div className={`${styles.bar} ${styles.bar2}`}></div>
+                            <div className={`${styles.bar} ${styles.bar3}`}></div>
+                            <div className={`${styles.bar} ${styles.bar4}`}></div>
+                            <div className={`${styles.bar} ${styles.bar5}`}></div>
+                            <div className={`${styles.bar} ${styles.bar6}`}></div>
+                            <div className={`${styles.bar} ${styles.bar7}`}></div>
+                            <div className={`${styles.bar} ${styles.bar8}`}></div>
+                            <br/>
+                            {recordStatus == 'RECORDED' ? 'Recording' : 'Uploading'}
+                        </div>
 
                     </div>
                     <div className={styles.pressCommandDesc}>
@@ -79,4 +92,13 @@ const Record = () => {
         </div>
     )
 }
-export default Record;
+
+const ProtectPage = () => {
+    return (
+
+        <RouteProtector>
+            <Record />
+        </RouteProtector>
+    )
+}
+export default ProtectPage

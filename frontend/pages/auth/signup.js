@@ -49,7 +49,7 @@ export function Login() {
     return (
         <div className='container'>
             <div className='row justify-content-center'>
-                <div className='col-5 pl-5'>
+                <div className='col-5 pl-5 text-center'>
                     <img src={icon.src} alt="" />
                     <span> Waiter Bolt</span>
                 </div>
@@ -58,7 +58,7 @@ export function Login() {
                 <div className='col-7 mb-2'>
                     <section className={`${styles.sectionOne} container shadow-lg pt-5 pb-5 `}>
                         <div className='row justify-content-center'>
-                            <div className='col-5'>
+                            <div className='col-6 text-center'>
                                 <div>
                                     <p className={'h5 ' + globalStyles.globalTextColor}>Welcome </p>
                                     <p className={styles.intr}>Create account to start receiving orders instantly.</p>
@@ -92,7 +92,7 @@ export function Login() {
                         </div>
                     </section>
                 </div>
-                <div className='col-5 ml-5 pb-3'>
+                <div className='col-5 ml-5 pb-3 text-center'>
                     <span className={styles.intr}>Already have an account ? </span><Link href="/auth/signin" className={"cursor-pointer " + globalStyles.globalTextColor + " " + styles.bottomLink} >Signin</Link>
                 </div>
             </div>
